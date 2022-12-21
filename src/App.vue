@@ -79,15 +79,16 @@ const updateMarker = (val) => {markerValue.value = val; mapCenter.value = val; }
 <template>
 <div>
 <!-- Info that is displayed in upper left, detailing what the app does --> 
+<div class = "top">
 <div class="description">
-  This application uses the <a href = "https://www.openbrewerydb.org/" target="_blank"  rel="noopener noreferrer">Open Brewery DB API</a>to display brewery data for the city of Huntsville, AL.<br/>
+  <h1>Brewery-Vue</h1>
+  This application uses the <a href = "https://www.openbrewerydb.org/" target="_blank"  rel="noopener noreferrer">Open Brewery DB API</a> to display brewery data for the city of Huntsville, AL.<br/>
   Due to the community driven nature of the API, complete information isn't always available. For example the brewery "Paradune Brewing" <a href ="https://api.openbrewerydb.org/breweries/paradune-brewing-huntsville" target="_blank"  rel="noopener noreferrer"> doesn't have longitude or latitude data in the database.</a>
   <br/>When possible, a marker will use the longitude and latitude data to show the location of the selected brewery.
 <br/><br/>
 For demonstration purposes, a custom API has been created to display information for the brewery "Straight To Ale"
   <button v-on:click="custom()" >View Details For : (Straight to Ale) Using Custom API </button>
 </div>
-
 <!-- Shows all information relevant to location of the brewery and marker placement-->
 <div class="info">
 <label>Name: <input style='width:100%'  v-cloak v-model="brewNameDetail"></label>
@@ -97,9 +98,12 @@ For demonstration purposes, a custom API has been created to display information
 <label>Zip Code: <input style='width:100%' v-model="brewPostalDetail"></label>
 <label>Longitude: <input style='width:100%' v-model="brewLongitudeDetail"></label>
 <label>Latitude: <input style='width:100%' v-model="brewLatitudeDetail"></label>
+</div> 
 </div>
 
-<div class = "float-container">
+
+
+<div class = "bottom">
 <!--List of breweries-->
 <div class="breweries">
 <ul v-for="brew in brews" v-bind:key="brew.id">
@@ -119,7 +123,7 @@ For demonstration purposes, a custom API has been created to display information
       :center=(mapCenter)
       :zoom="15"     
       map-type-id="terrain"
-      style="width: 1000px; height: 600px"
+      style="width: 100%; height: 595px"
   >
     <GMapMarker 
         :key="marker.id"
@@ -148,21 +152,43 @@ For demonstration purposes, a custom API has been created to display information
 </template>
 
 <style>
-.description{
-  display: block;
-  float: left;
-  width: 40%;
+* {
+  
+  box-sizing:border-box;
+  padding: 2px;
+
+}
+a:link {
+  color: yellow;
+}
+
+a:visited {
+  color: cyan;
+}
+
+.top{
+  display: flex;
+  color: aliceblue;
+  background-color: #253850;
+  width: 100%;
   font: 24px sans-serif;
 }
 
-.custom{
-  float: left;
-  width: 40%;
+.bottom{
+  display: flex;
+  color: aliceblue;
+  background-color: #253850;
+  width: 100%;
+  font: 24px sans-serif;
 }
 
-.float-container{
-  position: fixed;
-  top: 35%;  
+.description{
+margin-left: 10%;
+width: 40%;
+}
+.info{
+ margin-right: 10%;
+width: 40%; 
 }
 
 .marker-info{
@@ -173,31 +199,22 @@ For demonstration purposes, a custom API has been created to display information
   color: black;
 }
 
-.info{
-  font: 12px sans-serif;
-  float: right;
-  display:grid;
-  padding-right: 20%;  
-}
-
 .single-brewery{
   border: 1px solid gray;
 }
 
 .breweries {
 font: 24px sans-serif;
- width: 49%;
+ width: 40%;
  height: 600px;
-    float: left;   
-
-    border: 1px solid gray;
+ margin-left: 10%;
+ border: 1px solid gray;
 overflow: scroll;
 }
 
 .map{
-   width: 49%;
-  height: 500px;
-    float: right;    
+width: 40%;
 
+margin-right: 10%;
 }
 </style>
